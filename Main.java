@@ -9,6 +9,8 @@ public class Main {
 		Scanner scanner = new Scanner(System.in);//Oggetto Scanner che leggerà l'input dell'utente
 		Game game = new Game();//Istanza della classe Gme per poter usare il metodo .play()
 		Random random = new Random();//Oggetto random che servirà per generare la scelta casuale del computer
+		game.playerCounter = 0;
+		game.computerCounter = 0;
 		
 		while(true) {//Blocco while che si ripeterà finche il giocatore non sceglie 'no'
 			System.out.println("Enter your Choice (ROCK, PAPER, SCISSORS): ");
@@ -23,13 +25,22 @@ public class Main {
 			
 			String result = game.play(playerChoice, computerChoice);//Questa riga di codice chiama il metodo .play() a cui viene passato l scelta del giocatore e del computer
 			System.out.print(result);
+			System.out.println("\nYour points: " + game.playerCounter + "\nComputer Points: " + game.computerCounter);
 			
-			System.out.println("Do you want to play again? (yes/no)");
-			String playAgain = scanner.next();
-			if(!playAgain.equalsIgnoreCase("yes")) {//Controllo che la risposta si diversa da 'yes' ignorando le differenze di maiuscole
-				System.out.print("Thanks for playing");
-				break;//Interrompe il ciclo while
+			//System.out.println("Do you want to play again? (yes/no)");
+			//String playAgain = scanner.next();
+			if(game.playerCounter == 3 || game.computerCounter == 3) {//Controllo che la risposta si diversa da 'yes' ignorando le differenze di maiuscole
+				if(game.playerCounter == 3) {
+					System.out.println();
+					System.out.println("Congrats! You won the game!");
+					break;
+				}else {
+					System.out.println();
+					System.out.println("Sorry but the computer Won the Game. If you want to play again press F11");
+					break;
+				}
 			}
+			
 		}
 		scanner.close();//Chiusura di scanner per liberare risorse
 
